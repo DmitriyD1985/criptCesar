@@ -5,13 +5,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-public class Decripter
-{
+public class Decripter {
     public static void main(String[] args) {
-
         System.out.println(getFile("src/resource/textIn.txt"));
         for (int i = 0; i < 33; i++) {
-            System.out.println("Вдсиг "+i + " " +moveStringRight(getFile("src/resource/textIn.txt"), i));
+            System.out.println("Сдвиг " + i + " " + moveStringRight(getFile("src/resource/textIn.txt"), i));
         }
     }
 
@@ -30,38 +28,44 @@ public class Decripter
 
         return result.toString();
     }
-    private static String moveStringRight(String inputString, int shift){
-        final String  bigAlfabetString = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
-        final String  smallAlfabetString = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя";
+
+    private static String moveStringRight(String inputString, int shift) {
+        final String bigAlfabetString = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
+        final String smallAlfabetString = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя";
         List<String> bigList = Arrays.asList(bigAlfabetString.split(""));
         List<String> smalList = Arrays.asList(smallAlfabetString.split(""));
 
-        String [] arrOfSymbol = inputString.split("");
-        String [] shiftedText = new String[arrOfSymbol.length];
+        String[] arrOfSymbol = inputString.split("");
+        String[] shiftedText = new String[arrOfSymbol.length];
         for (int i = 0; i < arrOfSymbol.length; i++) {
-            int newIndex=0;
+            int newIndex = 0;
             int oldIndex = 0;
-            if(bigAlfabetString.contains(arrOfSymbol[i]))
-            {
+            if (bigAlfabetString.contains(arrOfSymbol[i])) {
                 oldIndex = bigAlfabetString.indexOf(arrOfSymbol[i]);
-                if(shift+oldIndex<33){newIndex = oldIndex+shift;}
-                if(shift+oldIndex>=33){newIndex = oldIndex+shift-33;}
+                if (shift + oldIndex < 33) {
+                    newIndex = oldIndex + shift;
+                }
+                if (shift + oldIndex >= 33) {
+                    newIndex = oldIndex + shift - 33;
+                }
 
                 shiftedText[i] = bigList.get(newIndex);
-            }
-
-            else if(smallAlfabetString.contains(arrOfSymbol[i]))
-            {
+            } else if (smallAlfabetString.contains(arrOfSymbol[i])) {
                 oldIndex = smallAlfabetString.indexOf(arrOfSymbol[i]);
-                if(shift+oldIndex<33){newIndex = oldIndex+shift;}
-                if(shift+oldIndex>=33){newIndex = oldIndex+shift-33;}
+                if (shift + oldIndex < 33) {
+                    newIndex = oldIndex + shift;
+                }
+                if (shift + oldIndex >= 33) {
+                    newIndex = oldIndex + shift - 33;
+                }
 
                 shiftedText[i] = smalList.get(newIndex);
+            } else {
+                shiftedText[i] = arrOfSymbol[i];
             }
-            else {shiftedText[i] = arrOfSymbol[i];}
         }
         StringBuilder sb = new StringBuilder();
-        for (String s:shiftedText) {
+        for (String s : shiftedText) {
             sb.append(s);
         }
         return sb.toString();
